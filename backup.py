@@ -33,14 +33,12 @@ for f in files:
     created_datetime = datetime.fromtimestamp(os.path.getctime(PATH))
     modified_datetime = datetime.fromtimestamp(os.path.getmtime(PATH))
 
-    # print "created: %s" % created_datetime
-    # print "last modified: %s" % modified_datetime
-
     cdate = created_datetime.strftime("%Y-%m-%d")
     mdate = modified_datetime.strftime("%Y-%m-%d")
 
-    a = datetime.strptime(cdate, "%Y-%m-%d")
-    if before_date <= a:
+    current_file_created_datetime = datetime.strptime(cdate, "%Y-%m-%d")
+
+    if before_date >= current_file_created_datetime:
         year_dir = cdate[0:4]
         if not os.path.exists(new_backup_directory + "/" + year_dir):
             os.mkdir(new_backup_directory + "/" + year_dir)
@@ -49,7 +47,7 @@ for f in files:
         filename_only = os.path.basename(f)
         destination = "./" + new_backup_directory + "/" + year_dir + "/" + filename_only
 
-        print "[+] Copying %s..." % file_to_copy
+        print "[+] Copying (%s)..." % file_to_copy
 
         copyfile(file_to_copy, destination)        
 
