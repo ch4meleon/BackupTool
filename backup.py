@@ -27,7 +27,7 @@ new_backup_directory = "backup_" + time.strftime("%Y%m%d_%H%M%S")
 if not os.path.exists(new_backup_directory):
     os.mkdir(new_backup_directory)
 
-print "[*] Processing files"
+print "[*] Processing files..."
 
 for f in files:
     created_datetime = datetime.fromtimestamp(os.path.getctime(PATH))
